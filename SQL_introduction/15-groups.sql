@@ -1,0 +1,3 @@
+-- Script that lists the number of records with the same score in second_table
+-- Groups by score and orders by count descending
+SELECT score, COUNT(*) AS number FROM second_table GROUP BY score ORDER BY number DESC;
