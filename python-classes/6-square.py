@@ -13,8 +13,8 @@ class Square:
         Initializes a new Square instance.
 
         Args:
-            size (int): The size of the square. Defaults to 0.
-            position (tuple): A tuple of 2 positive integers. Defaults to (0, 0).
+            size (int): Size of the square. Defaults to 0.
+            position (tuple): Tuple of 2 positive integers.
         """
         self.size = size
         self.position = position
