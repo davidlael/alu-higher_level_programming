@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 Module 12-pascal_triangle
-Contains a function that returns a list of lists representing Pascal's triangle.
+Returns a list of lists representing Pascal's triangle.
 """
 
 
