@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 """
 Module 7-base_geometry
-Defines a class BaseGeometry with area method and integer validator.
+Defines class BaseGeometry with area calculation and integer validation.
 """
 
 
 class BaseGeometry:
-    """A BaseGeometry class with area calculation and value validation."""
+    """A BaseGeometry class."""
 
     def area(self):
         """
@@ -20,10 +20,10 @@ class BaseGeometry:
 
     def integer_validator(self, name, value):
         """
-        Validates that a given value is a positive integer.
+        Validates that value is a positive integer.
 
         Args:
-            name (str): The name associated with the value.
+            name (str): The name associated with value.
             value (int): The value to validate.
 
         Raises:

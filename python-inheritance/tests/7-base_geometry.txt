@@ -2,13 +2,13 @@
 How to Use 7-base_geometry
 ==========================
 
-Importing the class:
+Importing the module and class:
     >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
 
 Testing instantiation:
     >>> bg = BaseGeometry()
 
-Testing integer_validator with valid values:
+Testing integer_validator with valid integers:
     >>> bg.integer_validator("my_int", 12)
     >>> bg.integer_validator("width", 89)
 
@@ -16,14 +16,14 @@ Testing integer_validator missing arguments:
     >>> bg.integer_validator()
     Traceback (most recent call last):
     ...
-    TypeError: ...
+    TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
 
     >>> bg.integer_validator("age")
     Traceback (most recent call last):
     ...
-    TypeError: ...
+    TypeError: integer_validator() missing 1 required positional argument: 'value'
 
-Testing integer_validator with invalid types (TypeError):
+Testing integer_validator with non-integer types (TypeError):
     >>> bg.integer_validator("name", "John")
     Traceback (most recent call last):
     ...
@@ -54,12 +54,17 @@ Testing integer_validator with invalid types (TypeError):
     ...
     TypeError: age must be an integer
 
+    >>> bg.integer_validator("age", False)
+    Traceback (most recent call last):
+    ...
+    TypeError: age must be an integer
+
     >>> bg.integer_validator("age", 3.14)
     Traceback (most recent call last):
     ...
     TypeError: age must be an integer
 
-Testing integer_validator with invalid values (ValueError):
+Testing integer_validator with non-positive values (ValueError):
     >>> bg.integer_validator("age", 0)
     Traceback (most recent call last):
     ...
