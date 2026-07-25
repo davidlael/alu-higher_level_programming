@@ -8,6 +8,8 @@ Usage:
     My name is John Smith
     >>> say_my_name("Bob")
     My name is Bob 
+    >>> say_my_name("", "Smith")
+    My name is  Smith
 
 Type Errors:
     >>> say_my_name(12, "White")
@@ -19,3 +21,8 @@ Type Errors:
     Traceback (most recent call last):
     ...
     TypeError: last_name must be a string
+
+    >>> say_my_name(None, "White")
+    Traceback (most recent call last):
+    ...
+    TypeError: first_name must be a string

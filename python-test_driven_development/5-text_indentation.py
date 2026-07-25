@@ -1,15 +1,12 @@
 #!/usr/bin/python3
-"""Module for printing formatted text with indents."""
+"""Module that formats text by adding two new lines."""
 
 
 def text_indentation(text):
     """Prints text with 2 new lines after '.', '?', and ':'.
 
     Args:
-        text: String to be printed.
-
-    Raises:
-        TypeError: If text is not a string.
+        text: String input.
     """
     if not isinstance(text, str):
         raise TypeError("text must be a string")

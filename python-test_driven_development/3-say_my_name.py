@@ -1,16 +1,13 @@
 #!/usr/bin/python3
-"""Module for printing first and last name."""
+"""Module that prints a formatted full name."""
 
 
 def say_my_name(first_name, last_name=""):
     """Prints 'My name is <first name> <last name>'.
 
     Args:
-        first_name: String representing first name.
-        last_name: String representing last name (defaults to empty string).
-
-    Raises:
-        TypeError: If first_name or last_name are not strings.
+        first_name: String first name.
+        last_name: String last name (defaults to empty string).
     """
     if not isinstance(first_name, str):
         raise TypeError("first_name must be a string")
