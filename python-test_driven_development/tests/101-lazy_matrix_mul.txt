@@ -10,7 +10,7 @@ Usage:
     >>> print(lazy_matrix_mul([[1, 2]], [[3, 4], [5, 6]]))
     [[13 16]]
 
-Missing Arguments:
+Missing Arguments Checks:
     >>> lazy_matrix_mul()
     Traceback (most recent call last):
     ...
@@ -21,7 +21,7 @@ Missing Arguments:
     ...
     TypeError: lazy_matrix_mul() missing 1 required positional argument: 'm_b'
 
-Scalar / Type Checks:
+Scalar / Non-List Inputs:
     >>> lazy_matrix_mul("not a list", [[1, 2]])
     Traceback (most recent call last):
     ...
@@ -32,7 +32,7 @@ Scalar / Type Checks:
     ...
     ValueError: Scalar operands are not allowed, use '*' instead
 
-Incompatible Matrix Dimensions Check:
+Incompatible Dimensions / Matrix Cannot Be Multiplied:
     >>> lazy_matrix_mul([[1, 2, 3]], [[1, 2], [3, 4]])
     Traceback (most recent call last):
     ...
