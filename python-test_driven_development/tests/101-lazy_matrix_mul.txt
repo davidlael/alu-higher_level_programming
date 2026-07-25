@@ -10,13 +10,13 @@ Usage:
     >>> print(lazy_matrix_mul([[1, 2]], [[3, 4], [5, 6]]))
     [[13 16]]
 
-TypeError Checks:
+Scalar Error Check:
     >>> lazy_matrix_mul("not a list", [[1, 2]])
     Traceback (most recent call last):
     ...
-    TypeError: Scalar operands are not allowed, use '*' instead
+    ValueError: Scalar operands are not allowed, use '*' instead
 
-ValueError Check:
+Dimension Mismatch Check:
     >>> lazy_matrix_mul([[1, 2, 3]], [[1, 2], [3, 4]])
     Traceback (most recent call last):
     ...
