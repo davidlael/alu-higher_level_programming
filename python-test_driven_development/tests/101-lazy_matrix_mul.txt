@@ -32,7 +32,12 @@ Scalar / Non-List Inputs:
     ...
     ValueError: Scalar operands are not allowed, use '*' instead
 
-Incompatible Dimensions Check:
+Incompatible Matrix Dimensions Checks:
+    >>> lazy_matrix_mul([[1, 2]], [[1, 2]])
+    Traceback (most recent call last):
+    ...
+    ValueError: shapes (1,2) and (1,2) not aligned: 2 (dim 1) != 1 (dim 0)
+
     >>> lazy_matrix_mul([[1, 2, 3]], [[1, 2], [3, 4]])
     Traceback (most recent call last):
     ...
