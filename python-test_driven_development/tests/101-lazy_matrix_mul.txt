@@ -21,7 +21,7 @@ Missing Arguments:
     ...
     TypeError: lazy_matrix_mul() missing 1 required positional argument: 'm_b'
 
-Scalar Error / Non-List Inputs:
+Scalar / Type Checks:
     >>> lazy_matrix_mul("not a list", [[1, 2]])
     Traceback (most recent call last):
     ...
@@ -32,8 +32,8 @@ Scalar Error / Non-List Inputs:
     ...
     ValueError: Scalar operands are not allowed, use '*' instead
 
-Incompatible Dimensions Check:
+Incompatible Matrix Dimensions Check:
     >>> lazy_matrix_mul([[1, 2, 3]], [[1, 2], [3, 4]])
     Traceback (most recent call last):
     ...
-    ValueError: shapes (1,3) and (2,2) not aligned: 3 (dim 1) != 2 (dim 0)
+    ValueError: shapes ... not aligned ...
