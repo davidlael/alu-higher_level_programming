@@ -1,0 +1,23 @@
+=======================================
+How to Use 101-lazy_matrix_mul.py
+=======================================
+
+Usage:
+    >>> lazy_matrix_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
+    >>> print(lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]]))
+    [[ 7 10]
+     [15 22]]
+    >>> print(lazy_matrix_mul([[1, 2]], [[3, 4], [5, 6]]))
+    [[13 16]]
+
+TypeError Checks:
+    >>> lazy_matrix_mul("not a list", [[1, 2]])
+    Traceback (most recent call last):
+    ...
+    TypeError: Scalar operands are not allowed, use '*' instead
+
+ValueError Check:
+    >>> lazy_matrix_mul([[1, 2, 3]], [[1, 2], [3, 4]])
+    Traceback (most recent call last):
+    ...
+    ValueError: shapes (1,3) and (2,2) not aligned: 3 (dim 1) != 2 (dim 0)
