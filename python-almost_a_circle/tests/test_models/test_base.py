@@ -144,3 +144,40 @@ class TestBase(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+class TestBaseSaveLoad(unittest.TestCase):
+    """Tests for save and load"""
+
+    def setUp(self):
+        Base._Base__nb_objects = 0
+
+    def test_save_to_file_square(self):
+        """Test save_to_file with Square"""
+        s = Square(5)
+        Square.save_to_file([s])
+        self.assertTrue(os.path.exists("Square.json"))
+
+    def test_load_from_file_square(self):
+        """Test load_from_file with Square"""
+        s = Square(5, 2, 1)
+        Square.save_to_file([s])
+        result = Square.load_from_file()
+        self.assertEqual(len(result), 1)
+        self.assertEqual(str(result[0]), str(s))
+
+    def test_load_from_file_multiple(self):
+        """Test load_from_file multiple"""
+        r1 = Rectangle(10, 7, 2, 8)
+        r2 = Rectangle(2, 4)
+        Rectangle.save_to_file([r1, r2])
+        result = Rectangle.load_from_file()
+        self.assertEqual(len(result), 2)
+
+    def test_save_to_file_overwrites(self):
+        """Test save_to_file overwrites"""
+        r1 = Rectangle(10, 7)
+        Rectangle.save_to_file([r1])
+        r2 = Rectangle(2, 4)
+        Rectangle.save_to_file([r2])
+        result = Rectangle.load_from_file()
+        self.assertEqual(len(result), 1)

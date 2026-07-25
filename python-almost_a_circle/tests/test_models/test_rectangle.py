@@ -287,3 +287,46 @@ class TestRectangle(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+class TestRectangleErrors(unittest.TestCase):
+    """Tests for Rectangle error messages"""
+
+    def test_width_type_message(self):
+        """Test width type error message"""
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            Rectangle("10", 2)
+
+    def test_width_value_message(self):
+        """Test width value error message"""
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            Rectangle(0, 2)
+
+    def test_height_type_message(self):
+        """Test height type error message"""
+        with self.assertRaisesRegex(TypeError, "height must be an integer"):
+            Rectangle(10, "2")
+
+    def test_height_value_message(self):
+        """Test height value error message"""
+        with self.assertRaisesRegex(ValueError, "height must be > 0"):
+            Rectangle(10, 0)
+
+    def test_x_type_message(self):
+        """Test x type error message"""
+        with self.assertRaisesRegex(TypeError, "x must be an integer"):
+            Rectangle(10, 2, "1")
+
+    def test_x_value_message(self):
+        """Test x value error message"""
+        with self.assertRaisesRegex(ValueError, "x must be >= 0"):
+            Rectangle(10, 2, -1)
+
+    def test_y_type_message(self):
+        """Test y type error message"""
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+            Rectangle(10, 2, 0, "1")
+
+    def test_y_value_message(self):
+        """Test y value error message"""
+        with self.assertRaisesRegex(ValueError, "y must be >= 0"):
+            Rectangle(10, 2, 0, -1)
