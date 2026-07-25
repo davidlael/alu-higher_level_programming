@@ -267,3 +267,55 @@ class TestSquareErrors(unittest.TestCase):
         """Test y value error message"""
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
             Square(5, 0, -1)
+
+class TestSquareDisplay(unittest.TestCase):
+    """Tests for Square display method"""
+
+    def setUp(self):
+        Base._Base__nb_objects = 0
+
+    def test_display_no_offset(self):
+        """Test display no offset"""
+        s = Square(3)
+        captured = StringIO()
+        sys.stdout = captured
+        s.display()
+        sys.stdout = sys.__stdout__
+        self.assertEqual(captured.getvalue(), "###\n###\n###\n")
+
+    def test_display_x_only(self):
+        """Test display x only"""
+        s = Square(2, 2)
+        captured = StringIO()
+        sys.stdout = captured
+        s.display()
+        sys.stdout = sys.__stdout__
+        self.assertEqual(captured.getvalue(), "  ##\n  ##\n")
+
+    def test_display_y_only(self):
+        """Test display y only"""
+        s = Square(2, 0, 2)
+        captured = StringIO()
+        sys.stdout = captured
+        s.display()
+        sys.stdout = sys.__stdout__
+        self.assertEqual(captured.getvalue(), "\n\n##\n##\n")
+
+    def test_update_no_args(self):
+        """Test update no args"""
+        s = Square(5, 1, 2, 3)
+        s.update()
+        self.assertEqual(str(s), "[Square] (3) 1/2 - 5")
+
+    def test_update_one_arg(self):
+        """Test update one arg"""
+        s = Square(5)
+        s.update(10)
+        self.assertEqual(s.id, 10)
+        self.assertEqual(s.size, 5)
+
+    def test_size_setter_negative(self):
+        """Test size setter negative"""
+        s = Square(5)
+        with self.assertRaises(ValueError):
+            s.size = -1
