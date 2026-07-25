@@ -376,3 +376,146 @@ class TestRectangleDisplay(unittest.TestCase):
         r.update(89)
         self.assertEqual(r.id, 89)
         self.assertEqual(r.width, 10)
+
+class TestRectangleExtra(unittest.TestCase):
+    """Extra tests for Rectangle"""
+
+    def setUp(self):
+        Base._Base__nb_objects = 0
+
+    def test_instantiation(self):
+        """Test instantiation"""
+        r = Rectangle(10, 2)
+        self.assertIsInstance(r, Rectangle)
+
+    def test_is_base(self):
+        """Test is Base"""
+        from models.base import Base
+        r = Rectangle(10, 2)
+        self.assertIsInstance(r, Base)
+
+    def test_two_args(self):
+        """Test two args"""
+        r1 = Rectangle(10, 2)
+        r2 = Rectangle(3, 4)
+        self.assertEqual(r1.id, 1)
+        self.assertEqual(r2.id, 2)
+
+    def test_five_args(self):
+        """Test five args"""
+        r = Rectangle(1, 2, 3, 4, 5)
+        self.assertEqual(r.id, 5)
+
+    def test_width_private(self):
+        """Test width is private"""
+        with self.assertRaises(AttributeError):
+            Rectangle(10, 2).__width
+
+    def test_height_private(self):
+        """Test height is private"""
+        with self.assertRaises(AttributeError):
+            Rectangle(10, 2).__height
+
+    def test_x_private(self):
+        """Test x is private"""
+        with self.assertRaises(AttributeError):
+            Rectangle(10, 2).__x
+
+    def test_y_private(self):
+        """Test y is private"""
+        with self.assertRaises(AttributeError):
+            Rectangle(10, 2).__y
+
+    def test_width_type_bool(self):
+        """Test width bool is int subclass - valid"""
+        r = Rectangle(True, 2)
+        self.assertEqual(r.width, True)
+
+    def test_area_type(self):
+        """Test area returns int"""
+        r = Rectangle(3, 2)
+        self.assertEqual(type(r.area()), int)
+
+    def test_update_two_args(self):
+        """Test update two args"""
+        r = Rectangle(10, 10)
+        r.update(89, 2)
+        self.assertEqual(r.id, 89)
+        self.assertEqual(r.width, 2)
+        self.assertEqual(r.height, 10)
+
+    def test_update_three_args(self):
+        """Test update three args"""
+        r = Rectangle(10, 10)
+        r.update(89, 2, 3)
+        self.assertEqual(r.height, 3)
+
+    def test_update_four_args(self):
+        """Test update four args"""
+        r = Rectangle(10, 10)
+        r.update(89, 2, 3, 4)
+        self.assertEqual(r.x, 4)
+
+    def test_update_kwargs_x(self):
+        """Test update kwargs x"""
+        r = Rectangle(10, 10)
+        r.update(x=5)
+        self.assertEqual(r.x, 5)
+
+    def test_update_kwargs_y(self):
+        """Test update kwargs y"""
+        r = Rectangle(10, 10)
+        r.update(y=5)
+        self.assertEqual(r.y, 5)
+
+    def test_to_dict_update(self):
+        """Test to_dictionary then update"""
+        r1 = Rectangle(10, 2, 1, 9)
+        r2 = Rectangle(1, 1)
+        r2.update(**r1.to_dictionary())
+        self.assertEqual(str(r1), str(r2))
+
+    def test_str_method(self):
+        """Test __str__ method exists"""
+        r = Rectangle(10, 2)
+        self.assertTrue(hasattr(r, '__str__'))
+
+    def test_display_method(self):
+        """Test display method exists"""
+        r = Rectangle(10, 2)
+        self.assertTrue(hasattr(r, 'display'))
+
+    def test_area_method(self):
+        """Test area method exists"""
+        r = Rectangle(10, 2)
+        self.assertTrue(hasattr(r, 'area'))
+
+    def test_update_method(self):
+        """Test update method exists"""
+        r = Rectangle(10, 2)
+        self.assertTrue(hasattr(r, 'update'))
+
+    def test_to_dictionary_method(self):
+        """Test to_dictionary method exists"""
+        r = Rectangle(10, 2)
+        self.assertTrue(hasattr(r, 'to_dictionary'))
+
+    def test_width_type_tuple(self):
+        """Test width type tuple"""
+        with self.assertRaises(TypeError):
+            Rectangle((1,), 2)
+
+    def test_height_type_list(self):
+        """Test height type list"""
+        with self.assertRaises(TypeError):
+            Rectangle(10, [2])
+
+    def test_x_type_none(self):
+        """Test x type None"""
+        with self.assertRaises(TypeError):
+            Rectangle(10, 2, None)
+
+    def test_y_type_none(self):
+        """Test y type None"""
+        with self.assertRaises(TypeError):
+            Rectangle(10, 2, 0, None)

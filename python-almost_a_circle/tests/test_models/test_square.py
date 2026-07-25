@@ -319,3 +319,134 @@ class TestSquareDisplay(unittest.TestCase):
         s = Square(5)
         with self.assertRaises(ValueError):
             s.size = -1
+
+class TestSquareExtra(unittest.TestCase):
+    """Extra tests for Square"""
+
+    def setUp(self):
+        Base._Base__nb_objects = 0
+
+    def test_instantiation(self):
+        """Test instantiation"""
+        s = Square(5)
+        self.assertIsInstance(s, Square)
+
+    def test_is_rectangle(self):
+        """Test is Rectangle"""
+        from models.rectangle import Rectangle
+        s = Square(5)
+        self.assertIsInstance(s, Rectangle)
+
+    def test_is_base(self):
+        """Test is Base"""
+        from models.base import Base
+        s = Square(5)
+        self.assertIsInstance(s, Base)
+
+    def test_one_arg(self):
+        """Test one arg"""
+        s = Square(5)
+        self.assertEqual(s.id, 1)
+
+    def test_two_args(self):
+        """Test two args"""
+        s = Square(5, 2)
+        self.assertEqual(s.x, 2)
+
+    def test_three_args(self):
+        """Test three args"""
+        s = Square(5, 2, 3)
+        self.assertEqual(s.y, 3)
+
+    def test_four_args(self):
+        """Test four args"""
+        s = Square(5, 2, 3, 4)
+        self.assertEqual(s.id, 4)
+
+    def test_size_private(self):
+        """Test size is private"""
+        with self.assertRaises(AttributeError):
+            Square(5).__size
+
+    def test_width_equals_height(self):
+        """Test width equals height"""
+        s = Square(5)
+        self.assertEqual(s.width, s.height)
+
+    def test_area_type(self):
+        """Test area returns int"""
+        s = Square(5)
+        self.assertEqual(type(s.area()), int)
+
+    def test_update_two_args(self):
+        """Test update two args"""
+        s = Square(5)
+        s.update(10, 3)
+        self.assertEqual(s.id, 10)
+        self.assertEqual(s.size, 3)
+
+    def test_update_three_args(self):
+        """Test update three args"""
+        s = Square(5)
+        s.update(10, 3, 4)
+        self.assertEqual(s.x, 4)
+
+    def test_update_kwargs_size(self):
+        """Test update kwargs size"""
+        s = Square(5)
+        s.update(size=10)
+        self.assertEqual(s.size, 10)
+
+    def test_update_kwargs_x(self):
+        """Test update kwargs x"""
+        s = Square(5)
+        s.update(x=3)
+        self.assertEqual(s.x, 3)
+
+    def test_update_kwargs_y(self):
+        """Test update kwargs y"""
+        s = Square(5)
+        s.update(y=3)
+        self.assertEqual(s.y, 3)
+
+    def test_to_dict_update(self):
+        """Test to_dictionary then update"""
+        s1 = Square(10, 2, 1)
+        s2 = Square(1, 1)
+        s2.update(**s1.to_dictionary())
+        self.assertEqual(str(s1), str(s2))
+
+    def test_str_method(self):
+        """Test __str__ method exists"""
+        s = Square(5)
+        self.assertTrue(hasattr(s, '__str__'))
+
+    def test_display_method(self):
+        """Test display method exists"""
+        s = Square(5)
+        self.assertTrue(hasattr(s, 'display'))
+
+    def test_area_method(self):
+        """Test area method exists"""
+        s = Square(5)
+        self.assertTrue(hasattr(s, 'area'))
+
+    def test_size_type_tuple(self):
+        """Test size type tuple"""
+        with self.assertRaises(TypeError):
+            Square((1,))
+
+    def test_size_type_dict(self):
+        """Test size type dict"""
+        with self.assertRaises(TypeError):
+            Square({})
+
+    def test_x_type_none(self):
+        """Test x type None"""
+        with self.assertRaises(TypeError):
+            Square(5, None)
+
+    def test_y_type_none(self):
+        """Test y type None"""
+        with self.assertRaises(TypeError):
+            Square(5, 0, None)
