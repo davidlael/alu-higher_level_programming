@@ -32,6 +32,23 @@ Scalar / Non-List Inputs:
     ...
     ValueError: Scalar operands are not allowed, use '*' instead
 
+Invalid Element Types (Non-numbers):
+    >>> lazy_matrix_mul([["1", 2]], [[1, 2]])
+    Traceback (most recent call last):
+    ...
+    TypeError: ...
+
+    >>> lazy_matrix_mul([[1, 2]], [[1, "2"]])
+    Traceback (most recent call last):
+    ...
+    TypeError: ...
+
+Non-Rectangular Matrix Check:
+    >>> lazy_matrix_mul([[1, 2], [3]], [[1, 2], [3, 4]])
+    Traceback (most recent call last):
+    ...
+    ValueError: setting an array element with a sequence.
+
 Incompatible Matrix Dimensions Checks:
     >>> lazy_matrix_mul([[1, 2]], [[1, 2]])
     Traceback (most recent call last):
