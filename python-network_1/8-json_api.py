@@ -6,8 +6,9 @@ import sys
 
 if __name__ == "__main__":
     letter = sys.argv[1] if len(sys.argv) > 1 else ""
+    url = "http://0.0.0.0:5000/search_user"
     try:
-        r = requests.post("http://0.0.0.0:5000/search_user", data={'q': letter})
+        r = requests.post(url, data={'q': letter})
         json_res = r.json()
         if not json_res:
             print("No result")
