@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """Module for Base class"""
 import json
+import csv
+import os
 
 
 class Base:
@@ -66,7 +68,6 @@ class Base:
     @classmethod
     def save_to_file_csv(cls, list_objs):
         """Serializes list_objs to CSV file"""
-        import csv
         filename = cls.__name__ + ".csv"
         if list_objs is None:
             list_objs = []
@@ -82,7 +83,6 @@ class Base:
     @classmethod
     def load_from_file_csv(cls):
         """Deserializes CSV file to list of instances"""
-        import csv
         filename = cls.__name__ + ".csv"
         try:
             with open(filename, "r", newline='') as f:
