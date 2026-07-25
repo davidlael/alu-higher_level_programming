@@ -330,3 +330,49 @@ class TestRectangleErrors(unittest.TestCase):
         """Test y value error message"""
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
             Rectangle(10, 2, 0, -1)
+
+class TestRectangleDisplay(unittest.TestCase):
+    """Tests for Rectangle display method"""
+
+    def setUp(self):
+        Base._Base__nb_objects = 0
+
+    def test_display_no_offset(self):
+        """Test display no offset"""
+        r = Rectangle(4, 6)
+        captured = StringIO()
+        sys.stdout = captured
+        r.display()
+        sys.stdout = sys.__stdout__
+        self.assertEqual(captured.getvalue(), "####\n####\n####\n####\n####\n####\n")
+
+    def test_display_x_only(self):
+        """Test display x offset only"""
+        r = Rectangle(3, 2, 1, 0)
+        captured = StringIO()
+        sys.stdout = captured
+        r.display()
+        sys.stdout = sys.__stdout__
+        self.assertEqual(captured.getvalue(), " ###\n ###\n")
+
+    def test_display_y_only(self):
+        """Test display y offset only"""
+        r = Rectangle(3, 2, 0, 2)
+        captured = StringIO()
+        sys.stdout = captured
+        r.display()
+        sys.stdout = sys.__stdout__
+        self.assertEqual(captured.getvalue(), "\n\n###\n###\n")
+
+    def test_update_no_args(self):
+        """Test update with no args"""
+        r = Rectangle(10, 10, 10, 10, 10)
+        r.update()
+        self.assertEqual(str(r), "[Rectangle] (10) 10/10 - 10/10")
+
+    def test_update_one_arg(self):
+        """Test update with one arg"""
+        r = Rectangle(10, 10, 10, 10)
+        r.update(89)
+        self.assertEqual(r.id, 89)
+        self.assertEqual(r.width, 10)
