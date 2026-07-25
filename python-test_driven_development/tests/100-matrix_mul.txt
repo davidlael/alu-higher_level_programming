@@ -9,6 +9,17 @@ Usage:
     >>> matrix_mul([[1, 2]], [[3, 4], [5, 6]])
     [[13, 16]]
 
+Missing Arguments:
+    >>> matrix_mul()
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix_mul() missing 2 required positional arguments: 'm_a' and 'm_b'
+
+    >>> matrix_mul([[1, 2]])
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix_mul() missing 1 required positional argument: 'm_b'
+
 List Validation:
     >>> matrix_mul("not a list", [[1, 2]])
     Traceback (most recent call last):
@@ -31,8 +42,18 @@ List of Lists Validation:
     ...
     TypeError: m_b must be a list of lists
 
-Empty Checks:
+Empty Matrix Checks:
     >>> matrix_mul([], [[1, 2]])
+    Traceback (most recent call last):
+    ...
+    ValueError: m_a can't be empty
+
+    >>> matrix_mul([[1, 2]], [])
+    Traceback (most recent call last):
+    ...
+    ValueError: m_b can't be empty
+
+    >>> matrix_mul([[]], [[1, 2]])
     Traceback (most recent call last):
     ...
     ValueError: m_a can't be empty
@@ -42,19 +63,29 @@ Empty Checks:
     ...
     ValueError: m_b can't be empty
 
-Element Types:
+Element Type Checks:
     >>> matrix_mul([["1", 2]], [[1, 2]])
     Traceback (most recent call last):
     ...
     TypeError: m_a should contain only integers or floats
 
-Rectangle Check:
+    >>> matrix_mul([[1, 2]], [[1, "2"]])
+    Traceback (most recent call last):
+    ...
+    TypeError: m_b should contain only integers or floats
+
+Rectangle Checks (Row Consistency):
     >>> matrix_mul([[1, 2], [3]], [[1, 2]])
     Traceback (most recent call last):
     ...
     TypeError: each row of m_a must be of the same size
 
-Multiplication Check:
+    >>> matrix_mul([[1, 2]], [[1, 2], [3]])
+    Traceback (most recent call last):
+    ...
+    TypeError: each row of m_b must be of the same size
+
+Multiplication Dimension Check:
     >>> matrix_mul([[1, 2, 3]], [[1, 2], [3, 4]])
     Traceback (most recent call last):
     ...
