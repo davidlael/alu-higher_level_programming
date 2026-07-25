@@ -2,8 +2,6 @@
 How to Use 0-add_integer.py
 ==============================
 
-This module defines `add_integer(a, b=98)`.
-
 Usage:
     >>> add_integer = __import__('0-add_integer').add_integer
     >>> add_integer(1, 2)
@@ -20,6 +18,12 @@ Float inputs:
     5
     >>> add_integer(-2.5, -3.1)
     -5
+
+Missing Arguments Check:
+    >>> add_integer()
+    Traceback (most recent call last):
+    ...
+    TypeError: add_integer() missing 1 required positional argument: 'a'
 
 Type Errors:
     >>> add_integer("4", 5)
@@ -41,3 +45,24 @@ Type Errors:
     Traceback (most recent call last):
     ...
     TypeError: a must be an integer
+
+Float Overflow & NaN Checks:
+    >>> add_integer(float('inf'))
+    Traceback (most recent call last):
+    ...
+    OverflowError: cannot convert float infinity to integer
+
+    >>> add_integer(0, float('inf'))
+    Traceback (most recent call last):
+    ...
+    OverflowError: cannot convert float infinity to integer
+
+    >>> add_integer(float('nan'))
+    Traceback (most recent call last):
+    ...
+    ValueError: cannot convert float NaN to integer
+
+    >>> add_integer(0, float('nan'))
+    Traceback (most recent call last):
+    ...
+    ValueError: cannot convert float NaN to integer
