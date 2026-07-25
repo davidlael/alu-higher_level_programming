@@ -234,3 +234,36 @@ class TestSquare(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+class TestSquareErrors(unittest.TestCase):
+    """Tests for Square error messages"""
+
+    def test_size_type_message(self):
+        """Test size type error message"""
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            Square("5")
+
+    def test_size_value_message(self):
+        """Test size value error message"""
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            Square(0)
+
+    def test_x_type_message(self):
+        """Test x type error message"""
+        with self.assertRaisesRegex(TypeError, "x must be an integer"):
+            Square(5, "1")
+
+    def test_x_value_message(self):
+        """Test x value error message"""
+        with self.assertRaisesRegex(ValueError, "x must be >= 0"):
+            Square(5, -1)
+
+    def test_y_type_message(self):
+        """Test y type error message"""
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+            Square(5, 0, "1")
+
+    def test_y_value_message(self):
+        """Test y value error message"""
+        with self.assertRaisesRegex(ValueError, "y must be >= 0"):
+            Square(5, 0, -1)
