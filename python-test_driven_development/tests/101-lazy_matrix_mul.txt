@@ -10,9 +10,9 @@ array([[13, 16]])
 >>> lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2]])
 Traceback (most recent call last):
 ...
-ValueError: shapes (2,2) and (1,2) not aligned: 2 (dim 1) != 1 (dim 0)
+ValueError: m_a and m_b can't be multiplied
 
 >>> lazy_matrix_mul([], [])
 Traceback (most recent call last):
 ...
-ValueError: matmul: Input operand 0 does not have enough dimensions ...
+ValueError: m_a and m_b can't be multiplied
