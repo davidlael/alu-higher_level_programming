@@ -62,3 +62,50 @@ class Base:
             return [cls.create(**d) for d in list_dicts]
         except FileNotFoundError:
             return []
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Serializes list_objs to CSV file"""
+        import csv
+        filename = cls.__name__ + ".csv"
+        if list_objs is None:
+            list_objs = []
+        with open(filename, "w", newline='') as f:
+            writer = csv.writer(f)
+            for obj in list_objs:
+                if cls.__name__ == "Rectangle":
+                    row = [obj.id, obj.width, obj.height, obj.x, obj.y]
+                else:
+                    row = [obj.id, obj.size, obj.x, obj.y]
+                writer.writerow(row)
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Deserializes CSV file to list of instances"""
+        import csv
+        filename = cls.__name__ + ".csv"
+        try:
+            with open(filename, "r", newline='') as f:
+                reader = csv.reader(f)
+                instances = []
+                for row in reader:
+                    row = [int(x) for x in row]
+                    if cls.__name__ == "Rectangle":
+                        d = {
+                            "id": row[0],
+                            "width": row[1],
+                            "height": row[2],
+                            "x": row[3],
+                            "y": row[4]
+                        }
+                    else:
+                        d = {
+                            "id": row[0],
+                            "size": row[1],
+                            "x": row[2],
+                            "y": row[3]
+                        }
+                    instances.append(cls.create(**d))
+                return instances
+        except FileNotFoundError:
+            return []
