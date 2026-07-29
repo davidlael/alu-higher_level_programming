@@ -1,31 +1,60 @@
 #!/usr/bin/python3
-"""Unittests for testing the Square class and its methods."""
-import os
+"""Unit tests for the Square class."""
 import unittest
-from models.square import Square
+from square import Square
 
 
-class TestSquareSaveToFile(unittest.TestCase):
-    """Unittests for testing save_to_file method of Square class."""
+class TestSquare(unittest.TestCase):
+    """Tests for the Square class."""
 
-    def tearDown(self):
-        """Clean up created files after each test."""
-        try:
-            os.remove("Square.json")
-        except IOError:
-            pass
+    def test_normal_creation(self):
+        """Test creating a Square with all attributes."""
+        s = Square(5, 1, 1, 12)
+        self.assertEqual(s.width, 5)
+        self.assertEqual(s.height, 5)
+        self.assertEqual(s.x, 1)
+        self.assertEqual(s.y, 1)
+        self.assertEqual(s.id, 12)
 
-    def test_save_to_file_none(self):
-        """Test save_to_file with None as input."""
-        Square.save_to_file(None)
-        with open("Square.json", "r") as f:
-            self.assertEqual(f.read(), "[]")
+    def test_size_property_get(self):
+        """Test that size returns the same as width and height."""
+        s = Square(7)
+        self.assertEqual(s.size, 7)
 
-    def test_save_to_file_empty_list(self):
-        """Test save_to_file with an empty list as input."""
-        Square.save_to_file([])
-        with open("Square.json", "r") as f:
-            self.assertEqual(f.read(), "[]")
+    def test_size_property_set(self):
+        """Test that setting size updates both width and height."""
+        s = Square(5)
+        s.size = 10
+        self.assertEqual(s.width, 10)
+        self.assertEqual(s.height, 10)
+
+    def test_str(self):
+        """Test the string representation."""
+        s = Square(4, 2, 1, 5)
+        self.assertEqual(str(s), "[Square] (5) 2/1 - 4")
+
+    def test_update_args(self):
+        """Test update with positional arguments."""
+        s = Square(10, 10, 10, 1)
+        s.update(1, 2, 3, 4)
+        self.assertEqual((s.id, s.size, s.x, s.y), (1, 2, 3, 4))
+
+    def test_update_kwargs(self):
+        """Test update with keyword arguments."""
+        s = Square(10, 10, 10, 1)
+        s.update(size=2, x=3)
+        self.assertEqual((s.size, s.x), (2, 3))
+
+    def test_to_dictionary(self):
+        """Test that to_dictionary returns the correct dict."""
+        s = Square(5, 1, 1, 12)
+        expected = {"id": 12, "size": 5, "x": 1, "y": 1}
+        self.assertEqual(s.to_dictionary(), expected)
+
+    def test_width_value_error(self):
+        """Test that a size <= 0 raises ValueError."""
+        with self.assertRaises(ValueError):
+            Square(0)
 
 
 if __name__ == "__main__":
