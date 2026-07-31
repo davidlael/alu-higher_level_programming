@@ -81,6 +81,7 @@ class TestBase_save_to_file(unittest.TestCase):
     """Tests for Base.save_to_file."""
 
     def tearDown(self):
+        """Remove any files created during the test."""
         for filename in ("Rectangle.json", "Square.json"):
             if os.path.exists(filename):
                 os.remove(filename)
@@ -136,6 +137,7 @@ class TestBase_load_from_file(unittest.TestCase):
     """Tests for Base.load_from_file."""
 
     def tearDown(self):
+        """Remove any files created during the test."""
         for filename in ("Rectangle.json", "Square.json"):
             if os.path.exists(filename):
                 os.remove(filename)
@@ -168,6 +170,7 @@ class TestBase_csv(unittest.TestCase):
     """Tests for Base.save_to_file_csv and Base.load_from_file_csv."""
 
     def tearDown(self):
+        """Remove any files created during the test."""
         for filename in ("Rectangle.csv", "Square.csv"):
             if os.path.exists(filename):
                 os.remove(filename)
